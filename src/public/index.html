@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="description" content="Documentation for the Advanced REST API built with Express.js, MongoDB and JWT." />
+  <title>Advanced REST API · Documentation</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top"><span class="logo" aria-hidden="true">{ }</span> Advanced REST API</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#endpoints">Endpoints</a>
+        <a href="#responses">Responses</a>
+        <a href="#status-codes">Status codes</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container">
+      <span class="pill" id="status"><span class="dot"></span><span id="status-text">Checking API…</span></span>
+      <h1>Advanced REST API</h1>
+      <p class="lead">
+        A modular MVC REST API built with Express.js and MongoDB, featuring JWT authentication,
+        role-based access, validation, search and pagination.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#endpoints">Explore endpoints</a>
+        <a class="btn btn-ghost" href="/api/health" target="_blank" rel="noopener">Health check</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>3</strong><span>Modules</span></div>
+        <div class="stat"><strong id="stat-endpoints">0</strong><span>Endpoints</span></div>
+        <div class="stat"><strong>2</strong><span>User roles</span></div>
+        <div class="stat"><strong>JWT</strong><span>Secured</span></div>
+      </div>
+      <p class="base">Base URL: <code id="base-url">/api</code> <button class="copy" data-copy-base type="button">Copy</button></p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="features">
+      <h2>Features</h2>
+      <div class="grid">
+        <article class="card"><h3>🔐 JWT Authentication</h3><p>Register and login with bcrypt hashed passwords and signed tokens.</p></article>
+        <article class="card"><h3>🛡️ Role-based access</h3><p>Public reads, login required for writes, admin only deletes.</p></article>
+        <article class="card"><h3>✅ Validation</h3><p>Every input is validated and returns clear 400 error details.</p></article>
+        <article class="card"><h3>🔎 Search and pagination</h3><p>Filter, sort and paginate categories and courses.</p></article>
+        <article class="card"><h3>🧱 Modular MVC</h3><p>Routes, controllers, models, validators and middlewares kept separate.</p></article>
+        <article class="card"><h3>⚙️ Secure by default</h3><p>Helmet headers, CORS, rate limiting and one central error handler.</p></article>
+      </div>
+    </section>
+
+    <section id="endpoints">
+      <h2>Endpoints</h2>
+      <p class="muted">Tap an endpoint to see its details. Protected routes need the header
+        <code>Authorization: Bearer &lt;token&gt;</code>.</p>
+      <div class="filters" id="filters" role="tablist" aria-label="Filter endpoints"></div>
+      <div id="endpoint-list" class="endpoint-list"></div>
+    </section>
+
+    <section id="responses">
+      <h2>Response format</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Success</h3>
+          <pre><code>{
+  "success": true,
+  "message": "Category created successfully",
+  "data": { "category": { "...": "..." } }
+}</code></pre>
+        </div>
+        <div class="card">
+          <h3>Error</h3>
+          <pre><code>{
+  "success": false,
+  "message": "Validation failed",
+  "errors": [
+    { "field": "email", "message": "Email is required" }
+  ]
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="status-codes">
+      <h2>Status codes</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Code</th><th>Meaning</th><th>When it happens</th></tr></thead>
+          <tbody>
+            <tr><td><code>200</code></td><td>OK</td><td>Request succeeded</td></tr>
+            <tr><td><code>201</code></td><td>Created</td><td>New resource created</td></tr>
+            <tr><td><code>400</code></td><td>Bad Request</td><td>Missing or invalid input</td></tr>
+            <tr><td><code>401</code></td><td>Unauthorized</td><td>Missing, invalid or expired token</td></tr>
+            <tr><td><code>403</code></td><td>Forbidden</td><td>Role is not allowed</td></tr>
+            <tr><td><code>404</code></td><td>Not Found</td><td>Unknown route or invalid or missing ID</td></tr>
+            <tr><td><code>409</code></td><td>Conflict</td><td>Duplicate value or category still in use</td></tr>
+            <tr><td><code>429</code></td><td>Too Many Requests</td><td>Rate limit exceeded</td></tr>
+            <tr><td><code>500</code></td><td>Server Error</td><td>Unexpected error</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Built with Express.js, MongoDB and JWT by Khadija · <span id="year"></span></p>
+    </div>
+  </footer>
+</body>
+</html>
